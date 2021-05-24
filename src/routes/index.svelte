@@ -92,10 +92,15 @@
   }
 
   function handleCopy(event) {
-    const rightCol = leftCards.map((card, i) => 
-      (matching[card.id] && matching[card.id].name) || ""
-    ).join('\n');
+    const rightCol = leftCards.map(card => {
+      if (matching[card.id] && matching[card.id].name) {
+        return matching[card.id].name;
+      } else {
+        return "";
+      }
+    }).join('\n');
     event.clipboardData.setData('text/plain', rightCol);
+    event.preventDefault()
   }
 
   function makeNames(clipboardContents) {
