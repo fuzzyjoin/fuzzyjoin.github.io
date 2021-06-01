@@ -8,7 +8,7 @@
   import Help from '$lib/Help.svelte';
 
 	const [send, receive] = crossfade({
-		duration: d => Math.sqrt(d * 200),
+		duration: d => Math.sqrt(d * 500),
 		fallback(node, params) {
 			const style = getComputedStyle(node);
 			const transform = style.transform === 'none' ? '' : style.transform;
@@ -174,7 +174,7 @@
         makeMatch(selection);
       }
       if (currentCard < leftCards.length - 1) {
-        setCard(currentCard + 1);
+        setTimeout(() => setCard(currentCard + 1), 250);
       }
     } else if (event.key === 'e') {
       exportData();
