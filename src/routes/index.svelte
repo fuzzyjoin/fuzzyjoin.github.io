@@ -14,7 +14,7 @@
 			const transform = style.transform === 'none' ? '' : style.transform;
 
 			return {
-				duration: 250,
+				duration: 10,
 				easing: cubicOut,
 				css: t => `
 					transform: ${transform} scale(${t});
@@ -151,11 +151,11 @@
     if (event.key === 'ArrowUp' && 
           currentCard >= 1) {
       setCard(currentCard - 1);
-      focus();
+      searching = false;
     } else if (event.key === 'ArrowDown' && 
                currentCard < leftCards.length - 1) {
       setCard(currentCard + 1);
-      focus();
+      searching = false;
     } else if (searching) {
       if (event.key === "Escape") {
         showHelp = false;
@@ -174,7 +174,7 @@
         makeMatch(selection);
       }
       if (currentCard < leftCards.length - 1) {
-        setTimeout(() => setCard(currentCard + 1), 250);
+        setTimeout(() => setCard(currentCard + 1), 100);
       }
     } else if (event.key === 'e') {
       exportData();
@@ -355,11 +355,11 @@
               <div class="right-names">
                 {#each filteredRightCards as rightCard, j (rightCard.id)}
                   <div class="right-name"
-                    animate:flip
+                    animate:flip={{duration: 100}}
                     out:send={{key: rightCard.id}}
                     in:fade|local
                     on:click|stopPropagation={ () => 
-                      makeMatch(j)
+                      makeMatch(rightCards.indexOf(rightCard))
                     }> 
                     <span class="digit">{ j + 1 }</span>
                     { rightCard.name } 
