@@ -126,10 +126,10 @@
   }
 
   function exportData() {
-    const data = leftCards.map((record, i) => 
+    const data = "Names,Matches,,Unmatched\n" + leftCards.map((record, i) => 
       record.name + "," + (
         (matching[record.id] && matching[record.id].name) || ""
-      )
+      ) + ",," + (rightCards[i] || {name: ""}).name
     ).join("\n");
     download({
       filename: "matching.csv", 
